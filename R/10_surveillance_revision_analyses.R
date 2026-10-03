@@ -68,7 +68,17 @@ figdat <- aapc %>%
     subsite = factor(subsite, levels = c("Duodenum", "Jejunum/Ileum", "Other specified", "NOS")),
     age_group = factor(age_group, levels = c("20-49", "50-69", "70+")),
     row_id = interaction(subsite, age_group, sep = " | ", lex.order = TRUE),
-    row_id = factor(row_id, levels = rev(unique(row_id)))
+    row_id = factor(row_id, levels = rev(unique(row_id))),
+    label_x = case_when(
+      absolute_change_per_million < 0 ~ -2.65,
+      absolute_change_per_million > 10 ~ absolute_change_ci_high - 0.30,
+      TRUE ~ absolute_change_ci_high + 0.35
+    ),
+    label_hjust = case_when(
+      absolute_change_per_million < 0 ~ 0,
+      absolute_change_per_million > 10 ~ 1,
+      TRUE ~ 0
+    )
   )
 write_csv(figdat, file.path(out, "Figure2_source_data.csv"))
 
@@ -113,14 +123,10 @@ p_b <- ggplot(figdat, aes(x = absolute_change_per_million, y = row_id, colour = 
   geom_point(size = 2.1) +
   geom_text(
     aes(
-      x = ifelse(
-        absolute_change_per_million >= 0,
-        absolute_change_ci_high + 0.55,
-        absolute_change_ci_low - 0.55
-      ),
+      x = label_x,
       label = sprintf("%+.2f", absolute_change_per_million)
     ),
-    hjust = ifelse(figdat$absolute_change_per_million >= 0, 0, 1),
+    hjust = figdat$label_hjust,
     colour = "black", size = 2.35, family = "Arial"
   ) +
   scale_colour_manual(values = palette_age) +
