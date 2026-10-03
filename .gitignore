@@ -1,0 +1,47 @@
+# Restricted or derived data
+*.txt
+*.tsv
+*.csv
+*.rds
+*.RData
+*.Rdata
+*.sas7bdat
+*.dta
+*.sav
+*.dic
+*.sim
+*.slm
+*.si
+*.sf
+
+# Manuscripts and rendered outputs
+*.docx
+*.doc
+*.pdf
+*.png
+*.tif
+*.tiff
+*.svg
+*.jpg
+*.jpeg
+
+# Local analysis directories
+cleaned/
+results/
+data/
+output/
+outputs/
+
+# R and OS metadata
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+Thumbs.db
+
+# Secrets and local configuration
+.env
+*.key
+*.pem
+credentials*
+secrets*
