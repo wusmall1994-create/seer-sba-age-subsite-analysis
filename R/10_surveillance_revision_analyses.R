@@ -112,8 +112,15 @@ p_b <- ggplot(figdat, aes(x = absolute_change_per_million, y = row_id, colour = 
   geom_errorbarh(aes(xmin = absolute_change_ci_low, xmax = absolute_change_ci_high), height = 0, linewidth = 0.55) +
   geom_point(size = 2.1) +
   geom_text(
-    aes(label = sprintf("%+.2f", absolute_change_per_million)),
-    hjust = ifelse(figdat$absolute_change_per_million >= 0, -0.12, 1.12),
+    aes(
+      x = ifelse(
+        absolute_change_per_million >= 0,
+        absolute_change_ci_high + 0.55,
+        absolute_change_ci_low - 0.55
+      ),
+      label = sprintf("%+.2f", absolute_change_per_million)
+    ),
+    hjust = ifelse(figdat$absolute_change_per_million >= 0, 0, 1),
     colour = "black", size = 2.35, family = "Arial"
   ) +
   scale_colour_manual(values = palette_age) +

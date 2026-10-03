@@ -17,7 +17,7 @@ flow <- data.frame(
   ),
   detail = c(
     "14,158 adults with malignant adenocarcinoma-only SBA\nSEER 17, 2000-2023",
-    "12,391 cases diagnosed in 2004-2023\nClassifiable stage4, including 1,049 unknown/unstaged\nExcluded: 1,767 diagnoses before 2004 or records without classifiable stage4",
+    "12,391 cases diagnosed in 2004-2023\nClassifiable stage, including 1,049 unknown/unstaged\nExcluded: 1,767 diagnoses before 2004 or records without classifiable stage",
     "11,592 cases diagnosed in 2004-2022\nExcluded: 799 diagnoses in 2023",
     "11,563 cases with valid survival follow-up\nExcluded: 29 DCO/autopsy cases without valid survival information\nIncludes 959 unknown/unstaged cases (8.29%)"
   ),
@@ -61,19 +61,7 @@ draw_flow <- function() {
 width_in <- 7.2
 height_in <- 8.0
 
-grDevices::png(paste0(stem, ".png"), width = width_in, height = height_in, units = "in", res = 600, bg = "white", type = "cairo")
-draw_flow()
-grDevices::dev.off()
-
 grDevices::tiff(paste0(stem, ".tiff"), width = width_in, height = height_in, units = "in", res = 600, compression = "lzw", bg = "white", type = "cairo")
-draw_flow()
-grDevices::dev.off()
-
-grDevices::svg(paste0(stem, ".svg"), width = width_in, height = height_in, bg = "white", family = "Arial")
-draw_flow()
-grDevices::dev.off()
-
-grDevices::cairo_pdf(paste0(stem, ".pdf"), width = width_in, height = height_in, family = "Arial", bg = "white")
 draw_flow()
 grDevices::dev.off()
 
