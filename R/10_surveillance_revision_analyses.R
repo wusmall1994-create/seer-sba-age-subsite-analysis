@@ -74,7 +74,11 @@ write_csv(figdat, file.path(out, "Figure2_source_data.csv"))
 
 palette_age <- c("20-49" = "#3B78A8", "50-69" = "#D28A32", "70+" = "#8B3F55")
 row_labels <- setNames(
-  paste0(as.character(figdat$subsite), "   ", as.character(figdat$age_group), " y"),
+  paste0(
+    as.character(figdat$subsite), "   ",
+    ifelse(as.character(figdat$age_group) == "70+", "≥70", as.character(figdat$age_group)),
+    " y"
+  ),
   as.character(figdat$row_id)
 )
 
