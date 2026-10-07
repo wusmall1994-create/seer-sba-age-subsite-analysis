@@ -22,6 +22,7 @@ All executable analysis files are in `R/`:
 8. `08_cebp_sensitivity_analyses.R` runs COVID-era, multiplicity, stage, treatment, and other prespecified sensitivity analyses.
 9. `09_cohort_flow_figure.R` generates the analytic-cohort flow diagram.
 10. `10_surveillance_revision_analyses.R` generates the age-by-subsite surveillance figure, descriptive absolute incidence-rate changes and confidence intervals, follow-up support summaries, restricted-year RMST analysis, and strict-histology sensitivity analyses.
+11. `11_anatomically_specified_incidence_sensitivity.R` combines mutually exclusive, identically standardized subsite rates to compare full-period age-specific trends for all SBA with trends after excluding small-intestine NOS tumors.
 
 ## Required local inputs
 
@@ -50,6 +51,7 @@ Rscript R/07_enhancement_analyses.R "D:/sba_project"
 Rscript R/08_cebp_sensitivity_analyses.R "D:/sba_project"
 Rscript R/09_cohort_flow_figure.R "D:/sba_project/results/manuscript"
 Rscript R/10_surveillance_revision_analyses.R "D:/sba_project" "D:/sba_project/results/cebp_surveillance_revision"
+Rscript R/11_anatomically_specified_incidence_sensitivity.R "D:/sba_project" "D:/sba_project/results/ccc_sensitivity"
 ```
 
 ## Software dependencies

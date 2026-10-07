@@ -76,14 +76,14 @@ palette_age <- c("20-49" = "#3B78A8", "50-69" = "#D28A32", "70+" = "#8B3F55")
 row_labels <- setNames(
   paste0(
     as.character(figdat$subsite), "   ",
-    ifelse(as.character(figdat$age_group) == "70+", "≥70", as.character(figdat$age_group)),
+    ifelse(as.character(figdat$age_group) == "70+", "\u226570", as.character(figdat$age_group)),
     " y"
   ),
   as.character(figdat$row_id)
 )
 
 theme_pub <- function() {
-  theme_classic(base_size = 8, base_family = "Arial") +
+  theme_classic(base_size = 8, base_family = "DejaVu Sans") +
     theme(
       axis.line = element_line(linewidth = 0.35, colour = "black"),
       axis.ticks = element_line(linewidth = 0.35, colour = "black"),
@@ -121,7 +121,7 @@ p_b <- ggplot(figdat, aes(x = absolute_change_per_million, y = row_id, colour = 
       label = sprintf("%+.2f", absolute_change_per_million)
     ),
     hjust = 0.5, vjust = -0.85,
-    colour = "black", size = 2.1, family = "Arial"
+    colour = "black", size = 2.1, family = "DejaVu Sans"
   ) +
   scale_colour_manual(values = palette_age) +
   scale_y_discrete(labels = NULL) +
