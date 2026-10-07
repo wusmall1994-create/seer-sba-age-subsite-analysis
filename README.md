@@ -24,6 +24,7 @@ All executable analysis files are in `R/`:
 10. `10_surveillance_revision_analyses.R` generates the age-by-subsite surveillance figure, descriptive absolute incidence-rate changes and confidence intervals, follow-up support summaries, restricted-year RMST analysis, and strict-histology sensitivity analyses.
 11. `11_anatomically_specified_incidence_sensitivity.R` combines mutually exclusive, identically standardized subsite rates to compare full-period age-specific trends for all SBA with trends after excluding small-intestine NOS tumors.
 12. `12_terminal_year_and_reporting_sensitivities.R` recalculates fixed-structure trends and descriptive absolute rate changes after truncation at 2021 and 2019, and extracts official segment-specific APC and sex-stratified AAPC results for reporting.
+13. `13_30_39_definition_bridge.R` compares matched SEER 8 annual series at ages 30–39 years for all malignant histologies, adenocarcinoma including NOS, and adenocarcinoma excluding NOS in the 2010–2019 and 2001–2021 windows. It retains zero-count years with a common Poisson population-offset model, inflates variance for Pearson overdispersion, and calculates descriptive absolute changes from exported age-adjusted rates.
 
 ## Required local inputs
 
@@ -34,6 +35,9 @@ Place the following authorized SEER*Stat exports in a local project directory. T
 - `05_SEER17_annual_race_subsite_rates.txt`
 - `07_SEER17_SBA_master_case_listing.txt`
 - `00_SEER8_histology_code_audit_1975_2023.txt`
+- `09A_SEER8_annual_30_39_allhist_including_NOS.txt`
+- `09B_SEER8_annual_30_39_adeno_including_NOS.txt`
+- `09C_SEER8_annual_30_39_adeno_excluding_NOS.txt`
 
 Joinpoint analyses additionally require the exported APC and AAPC files referenced by scripts 07, 08, and 10. The NCI Joinpoint Regression Program is separate software and is not bundled here.
 
@@ -54,6 +58,7 @@ Rscript R/09_cohort_flow_figure.R "D:/sba_project/results/manuscript"
 Rscript R/10_surveillance_revision_analyses.R "D:/sba_project" "D:/sba_project/results/cebp_surveillance_revision"
 Rscript R/11_anatomically_specified_incidence_sensitivity.R "D:/sba_project" "D:/sba_project/results/ccc_sensitivity"
 Rscript R/12_terminal_year_and_reporting_sensitivities.R "D:/sba_project" "D:/sba_project/results/ccc_terminal_year"
+Rscript R/13_30_39_definition_bridge.R "D:/authorized/seer_exports" "D:/sba_project/results/ccc_definition_bridge"
 ```
 
 ## Software dependencies
@@ -62,7 +67,7 @@ The code uses R packages `broom`, `cmprsk`, `dplyr`, `ggplot2`, `mice`, `patchwo
 
 ## Reproducibility boundary
 
-The repository supports transparent inspection of the statistical workflow. Exact reproduction requires authorized access to the same SEER submissions, the documented SEER*Stat exports, and the corresponding Joinpoint output files. The strict ICD-O-3 8140/3 trend analysis is a count-based population-offset sensitivity analysis and is not numerically interchangeable with the age-adjusted Joinpoint estimates. The terminal-year sensitivity preserves the full-period selected model structure; it does not reselect joinpoints after truncation. Analyses using different age bands or all small-intestine histologies require separate SEER*Stat exports with matching population denominators and must not be reconstructed from adenocarcinoma-only aggregate files.
+The repository supports transparent inspection of the statistical workflow. Exact reproduction requires authorized access to the same SEER submissions, the documented SEER*Stat exports, and the corresponding Joinpoint output files. The strict ICD-O-3 8140/3 trend analysis is a count-based population-offset sensitivity analysis and is not numerically interchangeable with the age-adjusted Joinpoint estimates. The terminal-year sensitivity preserves the full-period selected model structure; it does not reselect joinpoints after truncation. The 30–39-year definition bridge uses separate SEER*Stat exports with identical population denominators; it is a SEER 8 classification sensitivity analysis, not a reproduction of nationwide USCS estimates.
 
 ## License
 
