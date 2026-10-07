@@ -23,6 +23,7 @@ All executable analysis files are in `R/`:
 9. `09_cohort_flow_figure.R` generates the analytic-cohort flow diagram.
 10. `10_surveillance_revision_analyses.R` generates the age-by-subsite surveillance figure, descriptive absolute incidence-rate changes and confidence intervals, follow-up support summaries, restricted-year RMST analysis, and strict-histology sensitivity analyses.
 11. `11_anatomically_specified_incidence_sensitivity.R` combines mutually exclusive, identically standardized subsite rates to compare full-period age-specific trends for all SBA with trends after excluding small-intestine NOS tumors.
+12. `12_terminal_year_and_reporting_sensitivities.R` recalculates fixed-structure trends and descriptive absolute rate changes after truncation at 2021 and 2019, and extracts official segment-specific APC and sex-stratified AAPC results for reporting.
 
 ## Required local inputs
 
@@ -52,6 +53,7 @@ Rscript R/08_cebp_sensitivity_analyses.R "D:/sba_project"
 Rscript R/09_cohort_flow_figure.R "D:/sba_project/results/manuscript"
 Rscript R/10_surveillance_revision_analyses.R "D:/sba_project" "D:/sba_project/results/cebp_surveillance_revision"
 Rscript R/11_anatomically_specified_incidence_sensitivity.R "D:/sba_project" "D:/sba_project/results/ccc_sensitivity"
+Rscript R/12_terminal_year_and_reporting_sensitivities.R "D:/sba_project" "D:/sba_project/results/ccc_terminal_year"
 ```
 
 ## Software dependencies
@@ -60,7 +62,7 @@ The code uses R packages `broom`, `cmprsk`, `dplyr`, `ggplot2`, `mice`, `patchwo
 
 ## Reproducibility boundary
 
-The repository supports transparent inspection of the statistical workflow. Exact reproduction requires authorized access to the same SEER submissions, the documented SEER*Stat exports, and the corresponding Joinpoint output files. The strict ICD-O-3 8140/3 trend analysis is a count-based population-offset sensitivity analysis and is not numerically interchangeable with the age-adjusted Joinpoint estimates.
+The repository supports transparent inspection of the statistical workflow. Exact reproduction requires authorized access to the same SEER submissions, the documented SEER*Stat exports, and the corresponding Joinpoint output files. The strict ICD-O-3 8140/3 trend analysis is a count-based population-offset sensitivity analysis and is not numerically interchangeable with the age-adjusted Joinpoint estimates. The terminal-year sensitivity preserves the full-period selected model structure; it does not reselect joinpoints after truncation. Analyses using different age bands or all small-intestine histologies require separate SEER*Stat exports with matching population denominators and must not be reconstructed from adenocarcinoma-only aggregate files.
 
 ## License
 
